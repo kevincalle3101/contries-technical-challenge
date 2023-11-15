@@ -90,7 +90,7 @@ export const Sidebar = () => {
               <h5>USUARIO</h5>
               <NavLink
                 className={styles.NavLink}
-                to="/configPerfil"
+                to="/configuracion"
                 onClick={cambiarDireccionFlecha}
               >
                 <ManageAccountsIcon className={styles.iconSideBar} />

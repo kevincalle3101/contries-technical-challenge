@@ -33,7 +33,7 @@
   justify-content: initial;
   align-items: center;
   border-right: #4b4b4b solid 3px;
-  transition: all 170ms linear;
+  transition: all 100ms linear;
   z-index: 100;
 }
 .sidebarReducido {
@@ -48,7 +48,7 @@
   justify-content: initial;
   align-items: center;
   border-right: #4b4b4b solid 3px;
-  transition: all 200ms linear;
+  transition: all 150ms linear;
   z-index: 100;
 }
 
@@ -140,7 +140,7 @@ align-items: center;
 position: absolute;
 top: 0px;
 cursor: pointer;
-background-color: rgba(32, 32, 32, 0.7); 
+background-color: #14b8a6; 
 color: white;
 width: 50px;
 height: 30px;
@@ -151,7 +151,7 @@ border-radius: 5px;
 
 }
 .botonCerrar:hover {
-  background-color: grey;
+  background-color: #0d9488;
   color: white;
 }
 .arrow {
@@ -178,7 +178,7 @@ border-radius: 5px;
   transition: all 200ms linear;
 }
 .botonAbrir:hover {
-  background-color: grey;
+  background-color: #0d9488;
   color: white;
 }
 
