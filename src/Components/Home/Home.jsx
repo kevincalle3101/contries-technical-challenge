@@ -13,7 +13,6 @@ const Home = () => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [resultcountriesFiltered, setResultCountriesFiltered] = useState([]);
   const [imagesCountries, setImagesCountries] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
 
   const GET_COUNTRIES = gql`
   query {
@@ -33,7 +32,7 @@ const Home = () => {
     }
   }
 `;
-  const { data } = useQuery(GET_COUNTRIES);
+  const {  loading, data } = useQuery(GET_COUNTRIES);
   useEffect(() => {
     if (data && data.countries) {
       setCountriesResult(data.countries);
@@ -77,7 +76,7 @@ const Home = () => {
 
   return (
     <div className={styles.principalContainer}>
-      {isLoading ? (
+      {loading ? (
       <>
       <h5 className={styles.cargando}>Cargando...</h5>
       <img src='/mundoGirando.gif' alt='mundoGirando' className={styles.mundoGirando}/>
