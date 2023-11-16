@@ -3,7 +3,6 @@ import SearchBar from '../SearchBar/SearchBar.jsx';
 import styles from './Home.module.css';
 import { useState, useEffect } from 'react';
 import CountryDetail from '../CountryDetail/CountryDetail';
-import { useSelector } from 'react-redux';
 import { useQuery, gql } from '@apollo/client';
 import axios from 'axios';
 
@@ -13,6 +12,7 @@ const Home = () => {
   const [countriesResult, setCountriesResult] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [resultcountriesFiltered, setResultCountriesFiltered] = useState([]);
+  const  [imagesCountries, setImagesCountries] = useState({});
   const GET_COUNTRIES = gql`
   query {
     countries {
@@ -46,22 +46,18 @@ const { data } = useQuery(GET_COUNTRIES);
         const { data } = await axios(`https://pixabay.com/api/?key=40697066-f002b0ba72a46a22f2f0b5485&q=${country.name}&image_type=photo`);
         imagesCountries[country.name] = data.hits[1]?.webformatURL;
       }
-      let countriesWithImages = data.countries.map((country)=>
-        ({
-          ...country,
-          image: imagesCountries[country.name]
-        }))
-        setResultCountriesFiltered(countriesWithImages)
+        
+      setImagesCountries(imagesCountries);
       }
     }
     fetchCountries()
-  }, [data]);
+  }, [data ]);
   const searchCountry = (searchCountryByName) => {
     if(searchCountryByName) {
       const countriesFiltered = countriesResult.filter((country) => country.name.toLowerCase().includes(searchCountryByName.toLowerCase()))
       setResultCountriesFiltered(countriesFiltered)
     } else{
-      setResultCountriesFiltered(countriesResultCopy)
+      setResultCountriesFiltered(countriesResult)
     }
     setSelectedCountry(null);
   }
@@ -69,8 +65,6 @@ const { data } = useQuery(GET_COUNTRIES);
     if(arrayContinents.length > 0){
       const countriesFilteredByContinent = countriesResult.filter((country) => arrayContinents.includes(country.continent.name.toLowerCase()))
       setResultCountriesFiltered(countriesFilteredByContinent);
-    } else {
-      setResultCountriesFiltered(countriesResult);
     }
     setSelectedCountry(null);
   };
@@ -80,7 +74,7 @@ const { data } = useQuery(GET_COUNTRIES);
       <SearchBar searchCountry={searchCountry} filterByContinent={filterByContinent}/>
       <div className={styles.containerCards}>
         {resultcountriesFiltered?.map((country) => (
-          <CountryCard key={country.name} country={country} onClick={() =>setSelectedCountry(country)} />
+          <CountryCard key={country.name} country={country} image={imagesCountries[country.name]} onClick={() =>setSelectedCountry(country)} />
         ))
         }
         {
