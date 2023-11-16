@@ -8,39 +8,17 @@ import Vista2 from './Components/Vista2/Vista2';
 import ConfiguracionPerfil from './Components/ConfiguracionPerfil/ConfiguracionPerfil';
 import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import { setAllCountries } from "./Redux/actions";
+// import { setAllCountries } from "./Redux/actions.js";
 import { useQuery, gql } from '@apollo/client';
 
 
 function App() {
-  const dispatch = useDispatch();
 
-  const GET_COUNTRIES = gql`
-  query {
-    countries {
-      name
-      continent{
-        name
-      }
-      capital
-      languages{
-        name
-      }
-      currency
-      states {
-        name
-      }
-    }
-  }  
-`;
-  const { data } = useQuery(GET_COUNTRIES);
-  console.log("data", data);
-
-  useEffect(() => {
-    if(data?.countries){
-    dispatch(setAllCountries(data?.countries));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if(data?.countries){
+  //   dispatch(setAllCountries(data?.countries));
+  //   }
+  // }, []);
 
 
   return (
