@@ -42,6 +42,7 @@
     font-size: 25px;
     color: #303030;
     white-space: normal;
+    align-items: start;
   }
   .continent {
     margin: 0;

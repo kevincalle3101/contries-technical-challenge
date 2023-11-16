@@ -8,6 +8,12 @@
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     row-gap: 25px;
     column-gap: 53px;
+    max-width: 100%;
+}
+.secondarycontainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 @media (max-width:768px){
     .principalContainer {

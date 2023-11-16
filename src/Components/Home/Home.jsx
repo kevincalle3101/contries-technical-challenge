@@ -12,7 +12,7 @@ const Home = () => {
   const [countriesResult, setCountriesResult] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [resultcountriesFiltered, setResultCountriesFiltered] = useState([]);
-  const  [imagesCountries, setImagesCountries] = useState({});
+  const [imagesCountries, setImagesCountries] = useState({});
   const GET_COUNTRIES = gql`
   query {
     countries {
@@ -31,38 +31,38 @@ const Home = () => {
     }
   }
 `;
-const { data } = useQuery(GET_COUNTRIES);
+  const { data } = useQuery(GET_COUNTRIES);
   useEffect(() => {
     if (data && data.countries) {
-    setCountriesResult(data.countries);
-    setResultCountriesFiltered(data.countries)
+      setCountriesResult(data.countries);
+      setResultCountriesFiltered(data.countries)
     }
-}, [data]);
+  }, [data]);
   useEffect(() => {
     const fetchCountries = async () => {
       if (data && data.countries) {
-      let imagesCountries = {};
-      for (const country of data.countries) {
-        const { data } = await axios(`https://pixabay.com/api/?key=40697066-f002b0ba72a46a22f2f0b5485&q=${country.name}&image_type=photo`);
-        imagesCountries[country.name] = data.hits[1]?.webformatURL;
-      }
-        
-      setImagesCountries(imagesCountries);
+        let imagesCountries = {};
+        for (const country of data.countries) {
+          const { data } = await axios(`https://pixabay.com/api/?key=40697066-f002b0ba72a46a22f2f0b5485&q=${country.name}&image_type=photo`);
+          imagesCountries[country.name] = data.hits[1]?.webformatURL;
+        }
+
+        setImagesCountries(imagesCountries);
       }
     }
     fetchCountries()
-  }, [data ]);
+  }, [data]);
   const searchCountry = (searchCountryByName) => {
-    if(searchCountryByName) {
+    if (searchCountryByName) {
       const countriesFiltered = countriesResult.filter((country) => country.name.toLowerCase().includes(searchCountryByName.toLowerCase()))
       setResultCountriesFiltered(countriesFiltered)
-    } else{
+    } else {
       setResultCountriesFiltered(countriesResult)
     }
     setSelectedCountry(null);
   }
   const filterByContinent = (arrayContinents) => {
-    if(arrayContinents.length > 0){
+    if (arrayContinents.length > 0) {
       const countriesFilteredByContinent = countriesResult.filter((country) => arrayContinents.includes(country.continent.name.toLowerCase()))
       setResultCountriesFiltered(countriesFilteredByContinent);
     }
@@ -72,16 +72,18 @@ const { data } = useQuery(GET_COUNTRIES);
 
   return (
     <div className={styles.principalContainer}>
-      <SearchBar searchCountry={searchCountry} filterByContinent={filterByContinent}/>
-      <div className={styles.containerCards}>
-        {resultcountriesFiltered?.map((country) => (
-          <CountryCard key={country.name} country={country} image={imagesCountries[country.name]} onClick={() => setSelectedCountry(country)} />
-        ))
-        }
-        {
-          selectedCountry &&
-          <CountryDetail countryDetail={selectedCountry} image={imagesCountries[selectedCountry.name]}/>
-        }
+      <SearchBar searchCountry={searchCountry} filterByContinent={filterByContinent} />
+      <div className={styles.secondarycontainer}>
+        <div className={styles.containerCards}>
+          {resultcountriesFiltered?.map((country) => (
+            <CountryCard key={country.name} country={country} image={imagesCountries[country.name]} onClick={() => setSelectedCountry(country)} />
+          ))
+          }
+        </div>
+          {
+            selectedCountry &&
+            <CountryDetail countryDetail={selectedCountry} image={imagesCountries[selectedCountry.name]} setSelectedCountry={setSelectedCountry} />
+          }
       </div>
     </div>
   )
