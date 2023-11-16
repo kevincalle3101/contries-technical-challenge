@@ -80,7 +80,7 @@ const Home = () => {
       {isLoading ? (
       <>
       <h5 className={styles.cargando}>Cargando...</h5>
-      <img src={'../../../public/mundoGirando.gif'} alt='mundoGirando' className={styles.mundoGirando}/>
+      <img src='/mundoGirando.gif' alt='mundoGirando' className={styles.mundoGirando}/>
       </>)
     :(
       <>
