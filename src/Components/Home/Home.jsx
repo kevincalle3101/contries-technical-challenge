@@ -68,18 +68,19 @@ const { data } = useQuery(GET_COUNTRIES);
     }
     setSelectedCountry(null);
   };
+  console.log("selectedCountry", selectedCountry)
 
   return (
     <div className={styles.principalContainer}>
       <SearchBar searchCountry={searchCountry} filterByContinent={filterByContinent}/>
       <div className={styles.containerCards}>
         {resultcountriesFiltered?.map((country) => (
-          <CountryCard key={country.name} country={country} image={imagesCountries[country.name]} onClick={() =>setSelectedCountry(country)} />
+          <CountryCard key={country.name} country={country} image={imagesCountries[country.name]} onClick={() => setSelectedCountry(country)} />
         ))
         }
         {
           selectedCountry &&
-          <CountryDetail countryDetail={selectedCountry} />
+          <CountryDetail countryDetail={selectedCountry} image={imagesCountries[selectedCountry.name]}/>
         }
       </div>
     </div>
