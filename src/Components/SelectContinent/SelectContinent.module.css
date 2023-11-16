@@ -1,0 +1,40 @@
+.principalContainer{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin-top: 5.5rem;
+    font-size: 20px;
+    color: black;
+    background-color: white;
+    width: 25%;
+    border-radius: 10px;
+    z-index: 99;
+    padding: 15px;
+}
+.containerHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.containerContinents{
+    display: grid;
+    margin-top: 2rem;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    row-gap: 25px;
+    column-gap: 53px;
+}
+
+.img{
+    width: 200px;
+    height: 125px;
+}
+.label{
+    position: absolute;
+}
+
+@media (max-width:768px){
+    .containerContinents {
+      padding: 20px;
+    }
+  }
