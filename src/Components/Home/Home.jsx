@@ -13,6 +13,8 @@ const Home = () => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [resultcountriesFiltered, setResultCountriesFiltered] = useState([]);
   const [imagesCountries, setImagesCountries] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
   const GET_COUNTRIES = gql`
   query {
     countries {
@@ -48,6 +50,7 @@ const Home = () => {
         }
 
         setImagesCountries(imagesCountries);
+        setIsLoading(false);
       }
     }
     fetchCountries()
@@ -74,6 +77,13 @@ const Home = () => {
 
   return (
     <div className={styles.principalContainer}>
+      {isLoading ? (
+      <>
+      <h5 className={styles.cargando}>Cargando...</h5>
+      <img src={'../../../public/mundoGirando.gif'} alt='mundoGirando' className={styles.mundoGirando}/>
+      </>)
+    :(
+      <>
       <SearchBar searchCountry={searchCountry} filterByContinent={filterByContinent} />
       <div className={styles.secondarycontainer}>
         <div className={styles.containerCards}>
@@ -87,6 +97,9 @@ const Home = () => {
             <CountryDetail countryDetail={selectedCountry} image={imagesCountries[selectedCountry.name]} setSelectedCountry={setSelectedCountry} />
           }
       </div>
+      </>
+    )  
+    }
     </div>
   )
 }
