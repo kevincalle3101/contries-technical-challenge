@@ -9,7 +9,6 @@ import axios from 'axios';
 
 
 const Home = () => {
-  const pixabayApiKey = import.meta.env.VITE_PIXABAY_API_KEY;
   const [countriesResult, setCountriesResult] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [resultcountriesFiltered, setResultCountriesFiltered] = useState([]);
@@ -66,6 +65,8 @@ const Home = () => {
     if (arrayContinents.length > 0) {
       const countriesFilteredByContinent = countriesResult.filter((country) => arrayContinents.includes(country.continent.name.toLowerCase()))
       setResultCountriesFiltered(countriesFilteredByContinent);
+    } else if (arrayContinents.length === 0) {
+      setResultCountriesFiltered(countriesResult);
     }
     setSelectedCountry(null);
   };

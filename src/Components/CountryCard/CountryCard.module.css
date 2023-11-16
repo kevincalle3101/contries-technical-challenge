@@ -40,9 +40,10 @@
     margin: 0px;
     font-weight: 700;
     font-size: 25px;
-    color: #303030;
+    color: #14b8a6;
     white-space: normal;
     align-items: start;
+    text-align: left;
   }
   .continent {
     margin: 0;
