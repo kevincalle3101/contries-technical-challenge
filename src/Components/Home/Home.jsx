@@ -9,6 +9,7 @@ import axios from 'axios';
 
 
 const Home = () => {
+  const pixabayApiKey = import.meta.env.VITE_PIXABAY_API_KEY;
   const [countriesResult, setCountriesResult] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [resultcountriesFiltered, setResultCountriesFiltered] = useState([]);
@@ -43,7 +44,7 @@ const Home = () => {
       if (data && data.countries) {
         let imagesCountries = {};
         for (const country of data.countries) {
-          const { data } = await axios(`https://pixabay.com/api/?key=40697066-f002b0ba72a46a22f2f0b5485&q=${country.name}&image_type=photo`);
+          const { data } = await axios(`https://pixabay.com/api/?key=${import.meta.env.VITE_PIXABAY_API_KEY}&q=${country.name}&image_type=photo`);
           imagesCountries[country.name] = data.hits[1]?.webformatURL;
         }
 
